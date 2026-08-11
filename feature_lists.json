@@ -1,0 +1,26 @@
+{
+    "zero_importance_features": [
+        "acceleration_y_min",
+        "acceleration_x_zero_crossings",
+        "gyroscope_y_zero_crossings",
+        "acceleration_y_first_value",
+        "acceleration_z_zero_crossings",
+        "acceleration_z_peak_time_step",
+        "acceleration_magnitude_zero_crossings",
+        "gyroscope_magnitude_zero_crossings",
+        "dynamic_acceleration_min",
+        "dynamic_acceleration_zero_crossings"
+    ],
+    "top_10_features": [
+        "gyroscope_y_mean",
+        "gyroscope_x_mean",
+        "gyroscope_x_min",
+        "gyroscope_magnitude_energy",
+        "gyroscope_z_total_abs_change",
+        "gyroscope_magnitude_std",
+        "gyroscope_y_rms",
+        "gyroscope_x_q25",
+        "gyroscope_y_min",
+        "acceleration_x_last_value"
+    ]
+}
