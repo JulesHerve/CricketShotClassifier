@@ -1,0 +1,21 @@
+{
+    "features": [
+        "gyroscope_y_mean",
+        "gyroscope_x_mean",
+        "gyroscope_x_min",
+        "gyroscope_magnitude_energy",
+        "gyroscope_z_total_abs_change",
+        "gyroscope_magnitude_std",
+        "gyroscope_y_rms",
+        "gyroscope_x_q25",
+        "gyroscope_y_min",
+        "acceleration_x_last_value"
+    ],
+    "classes": [
+        "Cut",
+        "Drive",
+        "Pull",
+        "Stationary"
+    ],
+    "samples_per_recording": 50
+}

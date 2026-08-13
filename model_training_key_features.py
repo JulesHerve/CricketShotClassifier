@@ -7,7 +7,9 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 import matplotlib.pyplot as plt
 import seaborn as sns
 import json
- 
+from sklearn.tree import plot_tree
+import joblib 
+import sklearn
  
 with open("feature_lists.json", "r") as file:
     feature_lists = json.load(file)
@@ -147,3 +149,93 @@ evaluate_classification_model(
     predictions=predictions,
     
 )
+
+def visualise_random_forest_tree(
+
+    model,
+
+    X_train,
+
+    tree_index=0,
+
+    max_depth=3,
+
+    figsize=(24, 12),
+
+):
+ 
+    tree = model.estimators_[tree_index]
+
+    plt.figure(figsize=figsize)
+ 
+    plot_tree(
+        tree,
+        feature_names=X_train.columns,
+        class_names=model.classes_,
+        filled=True,
+        rounded=True,
+        proportion=True,
+        precision=2,
+        max_depth=max_depth,
+        fontsize=8,
+    )
+ 
+    plt.title(
+        f"Random Forest Decision Tree {tree_index + 1}",
+        fontsize=16,
+    )
+    plt.tight_layout()
+    plt.show()
+
+visualise_random_forest_tree(
+model=model,
+X_train=X_train,
+tree_index=0,
+max_depth=5,
+)
+
+def export_model(
+    model,
+    X_train,
+    model_path="cricket_shot_model.joblib",
+    metadata_path="model_metadata.json",
+):
+ 
+    joblib.dump(
+        model,
+        model_path,
+    )
+ 
+    metadata = {
+        "features": X_train.columns.tolist(),
+        "classes": model.classes_.tolist(),
+        "samples_per_recording": 50,
+    }
+ 
+    with open(metadata_path, "w") as file:
+        json.dump(
+            metadata,
+            file,
+            indent=4,
+        )
+ 
+    print(f"Model saved to: {model_path}")
+    print(f"Metadata saved to: {metadata_path}")
+ 
+ 
+export_model(
+    model=model,
+    X_train=X_train,
+)
+
+model = joblib.load(
+    "cricket_shot_model.joblib"
+)
+with open("model_metadata.json", "r") as file:
+    metadata = json.load(file)
+    
+sample = X_test.iloc[[0]]
+prediction = model.predict(sample)
+probabilities = model.predict_proba(sample)
+print("Prediction:", prediction[0])
+print("Probabilities:", probabilities[0])
