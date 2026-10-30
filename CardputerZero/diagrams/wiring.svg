@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 680" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+  <defs>
+    <style>
+      .bg{fill:#0a0e12}
+      .card{fill:#141c24;stroke:#27e08a;stroke-width:2;rx:10}
+      .sub{fill:#10171e;stroke:#3a4a56;stroke-width:1.5}
+      .opt{fill:#10171e;stroke:#f0c030;stroke-width:1.5;stroke-dasharray:5 4}
+      .title{fill:#27e08a;font-size:20px;font-weight:700}
+      .h{fill:#e8eef2;font-size:15px;font-weight:600}
+      .t{fill:#c6d0d8;font-size:12.5px}
+      .d{fill:#7a8892;font-size:11.5px}
+      .pin{fill:#cfe;font-family:'Consolas','SF Mono',monospace;font-size:11.5px}
+      .spi{stroke:#f0c030;stroke-width:2.5;fill:none}
+      .i2c{stroke:#4aa3ff;stroke-width:2.5;fill:none}
+      .one{stroke:#27e08a;stroke-width:2.5;fill:none}
+      .lbl{font-family:'Consolas',monospace;font-size:11px}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="680"/>
+  <text class="title" x="24" y="38">CardputerZero — wiring</text>
+  <text class="d" x="24" y="58">M5Stack Cardputer Adv + Cap CC1101 &amp; NFC (U219). All pins are ESP32-S3 GPIO numbers.</text>
+
+  <!-- ===== Cap (top) ===== -->
+  <rect class="card" x="300" y="86" width="360" height="118" rx="10"/>
+  <text class="h" x="320" y="112">Cap CC1101 &amp; NFC  (clicks on top)</text>
+  <text class="t" x="320" y="134">CC1101 sub-GHz  +  ST25R3916 NFC</text>
+  <text class="d" x="320" y="154">315 / 433 / 868–915 MHz   ·   13.56 MHz</text>
+  <text class="d" x="320" y="176">RF_SW1 = CC1101 GDO2 (set over SPI, never a host pin)</text>
+  <text class="d" x="320" y="192">Antenna band network passes only the 3 bands above</text>
+
+  <!-- ===== Cardputer (center) ===== -->
+  <rect class="card" x="300" y="266" width="360" height="150" rx="10"/>
+  <text class="h" x="320" y="292">Cardputer Adv — ESP32-S3</text>
+  <text class="t" x="320" y="314">Screen · keyboard · USB-C · microSD</text>
+  <text class="d" x="320" y="336">Built-in IR LED on GPIO 44 (send only)</text>
+  <rect class="sub" x="320" y="350" width="150" height="48" rx="6"/>
+  <text class="t" x="332" y="370">microSD</text>
+  <text class="pin" x="332" y="388">CS 12 · on SPI bus</text>
+  <rect class="sub" x="486" y="350" width="156" height="48" rx="6"/>
+  <text class="t" x="498" y="370">USB-C (TinyUSB)</text>
+  <text class="pin" x="498" y="388">CDC serial + HID</text>
+
+  <!-- ===== Shared SPI bus label ===== -->
+  <line class="spi" x1="480" y1="204" x2="480" y2="266"/>
+  <text class="lbl" x="490" y="226" fill="#f0c030">SPI bus (shared)</text>
+  <text class="lbl" x="490" y="242" fill="#f0c030">SCK 40 · MOSI 14 · MISO 39</text>
+
+  <!-- Cap signal callout (left) -->
+  <rect class="sub" x="30" y="92" width="238" height="200" rx="8"/>
+  <text class="h" x="46" y="116">Cap ↔ host pins</text>
+  <text class="pin" x="46" y="140">SPI SCK ......... 40</text>
+  <text class="pin" x="46" y="160">SPI MOSI ........ 14</text>
+  <text class="pin" x="46" y="180">SPI MISO ........ 39</text>
+  <text class="pin" x="46" y="202">CC1101 CS ....... 5</text>
+  <text class="pin" x="46" y="222">CC1101 GDO0 ..... 15</text>
+  <text class="pin" x="46" y="242">RF_SW0 .......... 13</text>
+  <text class="pin" x="46" y="262">NFC CS .......... 6</text>
+  <text class="pin" x="46" y="282">NFC IRQ ......... 4   (PWR_EN 3)</text>
+  <line class="spi" x1="268" y1="150" x2="300" y2="150"/>
+
+  <!-- Band truth table (right) -->
+  <rect class="sub" x="692" y="92" width="238" height="140" rx="8"/>
+  <text class="h" x="708" y="116">Band select</text>
+  <text class="pin" x="708" y="140">band     SW0  SW1(GDO2)</text>
+  <text class="pin" x="708" y="160">315 MHz   0     1</text>
+  <text class="pin" x="708" y="180">433 MHz   1     0</text>
+  <text class="pin" x="708" y="200">868/915   1     1</text>
+  <text class="d"   x="708" y="222">SW1 via IOCFG2: 2F=lo 6F=hi</text>
+  <line class="spi" x1="660" y1="150" x2="692" y2="150"/>
+
+  <!-- ===== Grove port + options (bottom) ===== -->
+  <text class="h" x="24" y="470">Grove port (side)  —  Grove A = GPIO 2, Grove B = GPIO 1  —  plug in ONE at a time:</text>
+
+  <rect class="opt" x="30" y="486" width="280" height="150" rx="8"/>
+  <text class="t" x="46" y="510">Mini IR Unit  (recommended)</text>
+  <text class="pin" x="46" y="534">IR receiver .... G1 (Grove B)</text>
+  <text class="pin" x="46" y="554">IR emitter ..... G2 (Grove A)</text>
+  <text class="d"  x="46" y="578">Needed to LEARN IR codes.</text>
+  <text class="d"  x="46" y="596">(Sending can also use the</text>
+  <text class="d"  x="46" y="612">built-in LED on GPIO 44.)</text>
+
+  <rect class="opt" x="340" y="486" width="280" height="150" rx="8"/>
+  <text class="t" x="356" y="510">RF 433 TX Unit (SYN115)</text>
+  <text class="pin" x="356" y="534">data ........... G2 (Grove A)</text>
+  <text class="d"  x="356" y="558">Optional simple 433 MHz OOK</text>
+  <text class="d"  x="356" y="576">transmitter. The CC1101 on</text>
+  <text class="d"  x="356" y="594">the Cap is the primary sub-GHz</text>
+  <text class="d"  x="356" y="612">radio; this is an alternative.</text>
+
+  <rect class="opt" x="650" y="486" width="280" height="150" rx="8"/>
+  <text class="t" x="666" y="510">I²C Hub (PCA9548A)</text>
+  <text class="pin" x="666" y="534">SDA ............ G2 (Grove A)</text>
+  <text class="pin" x="666" y="554">SCL ............ G1 (Grove B)</text>
+  <text class="d"  x="666" y="578">Only for adding several I²C</text>
+  <text class="d"  x="666" y="596">units later. Does NOT carry</text>
+  <text class="d"  x="666" y="612">the IR / 433 single-wire pins.</text>
+
+  <!-- connect grove options to cardputer -->
+  <line class="one" x1="170" y1="486" x2="170" y2="440"/>
+  <line class="one" x1="170" y1="440" x2="480" y2="440"/>
+  <line class="one" x1="480" y1="440" x2="480" y2="416"/>
+  <line class="i2c" x1="790" y1="486" x2="790" y2="452"/>
+  <line class="i2c" x1="790" y1="452" x2="480" y2="452"/>
+  <text class="lbl" x="196" y="434" fill="#27e08a">Grove GPIO (IR / 433)</text>
+  <text class="lbl" x="560" y="466" fill="#4aa3ff">Grove I²C</text>
+
+  <text class="d" x="24" y="664">Legend:  amber = shared SPI bus   ·   green = single-wire (IR / 433)   ·   blue = I²C</text>
+</svg>
