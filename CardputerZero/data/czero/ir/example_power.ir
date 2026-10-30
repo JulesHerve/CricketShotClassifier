@@ -1,6 +1,0 @@
-CardputerZero IR
-type: parsed
-protocol: NEC
-address: 4
-command: 8
-bits: 32

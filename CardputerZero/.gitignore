@@ -1,9 +1,0 @@
-# PlatformIO
-.pio/
-.pioenvs/
-.piolibdeps/
-*.bin
-*.elf
-# Editor
-.vscode/
-.DS_Store
